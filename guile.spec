@@ -148,8 +148,7 @@ Scheme module.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 autoreconf -vfi
 
 #fix encodings
@@ -168,10 +167,10 @@ export CXX=g++
     --with-threads \
     --with-pic
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 #remove rpath
 chrpath -d %{buildroot}%{_bindir}/%{name}
