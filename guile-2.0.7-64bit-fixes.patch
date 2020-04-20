@@ -1,0 +1,31 @@
+--- guile-2.0.7/libguile/hash.c~	2012-10-12 21:21:45.000000000 +0000
++++ guile-2.0.7/libguile/hash.c	2012-12-15 22:06:55.285236565 +0000
+@@ -273,7 +273,7 @@
+ unsigned long
+ scm_ihashq (SCM obj, unsigned long n)
+ {
+-  return (SCM_UNPACK (obj) >> 1) % n;
++  return ((unsigned long) SCM_UNPACK (obj) >> 1) % n;
+ }
+ 
+ 
+@@ -309,7 +309,7 @@
+   if (SCM_NUMP(obj))
+     return (unsigned long) scm_hasher(obj, n, 10);
+   else
+-    return SCM_UNPACK (obj) % n;
++    return (unsigned long) SCM_UNPACK (obj) % n;
+ }
+ 
+ 
+--- guile-2.0.7/libguile/struct.c~	2012-10-12 21:21:45.000000000 +0000
++++ guile-2.0.7/libguile/struct.c	2012-12-15 22:08:10.400235620 +0000
+@@ -919,7 +919,7 @@
+ {
+   /* The length of the hash table should be a relative prime it's not
+      necessary to shift down the address.  */
+-  return SCM_UNPACK (obj) % n;
++  return (unsigned long) SCM_UNPACK (obj) % n;
+ }
+ 
+ /* Return the hash of struct OBJ, modulo N.  Traverse OBJ's fields to
