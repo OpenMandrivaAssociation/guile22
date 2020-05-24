@@ -158,9 +158,6 @@ for i in libguile/ChangeLog*; do
 done
 
 %build
-# http://llvm.org/bugs/show_bug.cgi?id=14406
-export CC=gcc
-export CXX=g++
 %configure \
     --disable-error-on-warning \
     --disable-rpath \
