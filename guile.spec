@@ -4,13 +4,13 @@
 %define devname %mklibname %{name} -d
 
 Summary:	GNU implementation of Scheme for application extensibility
-Name:		guile
+Name:		guile22
 Version:	2.2.4
 Release:	3
 License:	LGPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/guile/guile.html
-Source0:	ftp://ftp.gnu.org/pub/gnu/guile/%{name}-%{version}.tar.xz
+Source0:	ftp://ftp.gnu.org/pub/gnu/guile/guile-%{version}.tar.xz
 #Patch0:		guile-2.0.7-64bit-fixes.patch
 Patch1:		guile-2.0.7-drop-ldflags-from-pkgconfig.patch
 Patch3:		guile-2.0.7-turn-off-gc-test.patch
@@ -44,13 +44,9 @@ guile-devel package.
 %files
 %doc AUTHORS GUILE-VERSION README THANKS
 %{_bindir}/%{name}
-%{_bindir}/%{name}-tools
-%{_bindir}/guild
-%{_libdir}/%{name}
-%exclude %{_libdir}/%{name}/%{api}
-%{_datadir}/%{name}
-%exclude %{_datadir}/%{name}/%{api}
-%{_mandir}/man1/guile.1.*
+%{_bindir}/guile-tools22
+%{_bindir}/guild22
+%{_mandir}/man1/guile22.1.*
 %{_infodir}/*
 
 %triggerin -- slib
@@ -88,7 +84,7 @@ Obsoletes:	%{mklibname guilereadline 18 18} < 2.2.3
 This package contains Guile shared object libraries.
 
 %files -n %{libname}
-%{_libdir}/lib%{name}-%{api}.so.%{major}*
+%{_libdir}/libguile-%{api}.so.%{major}*
 
 #----------------------------------------------------------------------------
 
@@ -109,12 +105,12 @@ for libguile. C headers, aclocal macros, the `guile1.4-snarf' and
 GNU Ubiquitous Intelligent Language for Extension
 
 %files -n %{devname}
-%{_bindir}/%{name}-config
-%{_bindir}/%{name}-snarf
+%{_bindir}/guile-config22
+%{_bindir}/guile-snarf22
 %{_datadir}/aclocal/*
-%{_includedir}/%{name}
-%{_libdir}/lib%{name}-%{api}.so
-%{_libdir}/pkgconfig/%{name}*.pc
+%{_includedir}/guile
+%{_libdir}/libguile-%{api}.so
+%{_libdir}/pkgconfig/guile*.pc
 %{_datadir}/gdb/auto-load%{_libdir}/libguile*.scm
 
 #----------------------------------------------------------------------------
@@ -129,26 +125,26 @@ This package contains Scheme runtime for GUILE, including ice-9
 Scheme module.
 
 %files runtime
-%{_libdir}/%{name}/%{api}/*
-%{_datadir}/%{name}/%{api}/*.scm
-%{_datadir}/%{name}/%{api}/*.txt
-%{_datadir}/%{name}/%{api}/ice-9/*
-%{_datadir}/%{name}/%{api}/language/*
-%{_datadir}/%{name}/%{api}/oop/*
-%{_datadir}/%{name}/%{api}/rnrs/*
-%{_datadir}/%{name}/%{api}/scripts/*
-%{_datadir}/%{name}/%{api}/srfi/*
-%{_datadir}/%{name}/%{api}/sxml/*
-%{_datadir}/%{name}/%{api}/system/*
-%{_datadir}/%{name}/%{api}/texinfo/*
-%{_datadir}/%{name}/%{api}/web/*
-%ghost %{_datadir}/%{name}/%{api}/slibcat
-%ghost %{_datadir}/%{name}/%{api}/slib
+%{_libdir}/guile/%{api}/*
+%{_datadir}/guile/%{api}/*.scm
+%{_datadir}/guile/%{api}/*.txt
+%{_datadir}/guile/%{api}/ice-9/*
+%{_datadir}/guile/%{api}/language/*
+%{_datadir}/guile/%{api}/oop/*
+%{_datadir}/guile/%{api}/rnrs/*
+%{_datadir}/guile/%{api}/scripts/*
+%{_datadir}/guile/%{api}/srfi/*
+%{_datadir}/guile/%{api}/sxml/*
+%{_datadir}/guile/%{api}/system/*
+%{_datadir}/guile/%{api}/texinfo/*
+%{_datadir}/guile/%{api}/web/*
+%ghost %{_datadir}/guile/%{api}/slibcat
+%ghost %{_datadir}/guile/%{api}/slib
 
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n guile-%{version}
 autoreconf -vfi
 
 #fix encodings
@@ -159,6 +155,7 @@ done
 
 %build
 %configure \
+    --program-suffix=22 \
     --disable-error-on-warning \
     --disable-rpath \
     --with-threads \
@@ -173,8 +170,8 @@ done
 chrpath -d %{buildroot}%{_bindir}/%{name}
 
 #for ghost files
-touch %{buildroot}%{_datadir}/%{name}/%{api}/slibcat
-touch %{buildroot}%{_datadir}/%{name}/%{api}/slib
+touch %{buildroot}%{_datadir}/guile/%{api}/slibcat
+touch %{buildroot}%{_datadir}/guile/%{api}/slib
 
 mkdir -p %{buildroot}/%{_datadir}/gdb/auto-load%{_libdir}
 mv -f %{buildroot}%{_libdir}/libguile-*gdb.scm %{buildroot}%{_datadir}/gdb/auto-load%{_libdir}
