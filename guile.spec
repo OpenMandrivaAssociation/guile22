@@ -18,7 +18,7 @@ Patch4:		guile-2.0.3-mktemp.patch
 #Patch5:		workaround-ice-ssa-corruption.patch
 
 BuildRequires:	chrpath
-BuildRequires:	libunistring-devel
+BuildRequires:	pkgconfig(libunistring)
 BuildRequires:	texinfo
 # for srfi-19.test
 BuildRequires:	timezone
