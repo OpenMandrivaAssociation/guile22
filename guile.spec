@@ -5,14 +5,15 @@
 
 Summary:	GNU implementation of Scheme for application extensibility
 Name:		guile22
-Version:	2.2.4
-Release:	3
+Version:	2.2.7
+Release:	1
 License:	LGPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/guile/guile.html
 Source0:	ftp://ftp.gnu.org/pub/gnu/guile/guile-%{version}.tar.xz
 #Patch0:		guile-2.0.7-64bit-fixes.patch
-Patch1:		guile-2.0.7-drop-ldflags-from-pkgconfig.patch
+
+#Patch1:		guile-2.0.7-drop-ldflags-from-pkgconfig.patch
 Patch3:		guile-2.0.7-turn-off-gc-test.patch
 Patch4:		guile-2.0.3-mktemp.patch
 #Patch5:		workaround-ice-ssa-corruption.patch
