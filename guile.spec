@@ -80,7 +80,7 @@ Summary:	Libraries for Guile %{version}
 Group:		System/Libraries
 Requires:	%{name}-runtime = %{EVRD}
 Obsoletes:	%{mklibname guilereadline 18 18} < 2.2.3
-
+Obsoletes:	%{mklibname guile 2.2 1} < 2.2.7
 %description -n %{libname}
 This package contains Guile shared object libraries.
 
