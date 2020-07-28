@@ -6,7 +6,7 @@
 Summary:	GNU implementation of Scheme for application extensibility
 Name:		guile22
 Version:	2.2.7
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/guile/guile.html
@@ -179,3 +179,16 @@ mv -f %{buildroot}%{_libdir}/libguile-*gdb.scm %{buildroot}%{_datadir}/gdb/auto-
 
 #slib needs this
 mkdir -p %{buildroot}%{_datadir}/guile/site
+
+for i in $(seq 1 10); do
+  mv %{buildroot}%{_infodir}/guile{,-%{mver}}.info-$i
+  sed -i -e 's/guile\.info/guile-%{mver}.info/' %{buildroot}%{_infodir}/guile-%{mver}.info-$i
+  sed -i -e 's/\* Guile Reference: (guile)/* Guile %{mver} Reference: (guile-%{mver})/' %{buildroot}%{_infodir}/guile-%{mver}.info-$i
+done
+	
+mv %{buildroot}%{_infodir}/guile{,-%{mver}}.info
+sed -i -e 's/guile\.info/guile-%{mver}.info/' %{buildroot}%{_infodir}/guile-%{mver}.info
+sed -i -e 's/\* Guile Reference: (guile)/* Guile %{mver} Reference: (guile-%{mver})/' %{buildroot}%{_infodir}/guile-%{mver}.info
+mv %{buildroot}%{_infodir}/r5rs{,-%{mver}}.info
+mv %{buildroot}%{_datadir}/aclocal/guile{,-%{mver}}.m4
+
