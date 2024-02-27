@@ -6,7 +6,7 @@
 Summary:	GNU implementation of Scheme for application extensibility
 Name:		guile22
 Version:	2.2.7
-Release:	4
+Release:	5
 License:	LGPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/guile/guile.html
@@ -22,6 +22,7 @@ BuildRequires:	chrpath
 BuildRequires:	pkgconfig(libunistring)
 BuildRequires:	texinfo
 # for srfi-19.test
+BuildRequires:	locales-extra-charsets
 BuildRequires:	timezone
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
