@@ -9,7 +9,7 @@ Version:	2.2.7
 Release:	5
 License:	LGPLv2+
 Group:		Development/Other
-Url:		http://www.gnu.org/software/guile/guile.html
+Url:		https://www.gnu.org/software/guile/guile.html
 Source0:	ftp://ftp.gnu.org/pub/gnu/guile/guile-%{version}.tar.xz
 #Patch0:		guile-2.0.7-64bit-fixes.patch
 
